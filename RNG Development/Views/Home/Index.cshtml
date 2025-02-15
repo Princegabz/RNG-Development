@@ -3,29 +3,98 @@
     ViewData["Title"] = "Welcome to RNG Development";
 }
 
-<header class="hero">
-    <div class="hero-content">
-        <h1>RNG Development</h1>
-        <p>Innovative Software Solutions for a Digital Future</p>
-        <a href="/Home/Services" class="btn">Explore Services</a>
-    </div>
-</header>
-
-<section id="services" class="services">
-    <h2>What We Offer</h2>
-    <div class="service-cards">
-        <div class="card">
-            <h3>Custom Software</h3>
-            <p>Tailored applications built for your business needs.</p>
-        </div>
-        <div class="card">
-            <h3>Web Development</h3>
-            <p>Scalable and modern websites that drive engagement.</p>
-        </div>
-        <div class="card">
-            <h3>Cloud Solutions</h3>
-            <p>Secure and efficient cloud-based systems.</p>
+<section id="intro" class="intro-section" style="margin-top: 100px;">
+    <div class="container">
+        <h1>Welcome to RNG Development</h1>
+        <div class="slideshow">
+            <p class="slide">We provide <span class="highlight">cutting-edge</span> software solutions.</p>
+            <p class="slide">Our expertise spans <span class="highlight">custom software</span> and cloud solutions.</p>
+            <p class="slide">We focus on <span class="highlight">IT consulting</span> and digital transformation.</p>
         </div>
     </div>
 </section>
+
+<section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-cards">
+        <div class="card">
+            <i class="fas fa-code icon"></i>
+            <h3>Custom Software</h3>
+            <p>We build tailored applications to meet your unique business requirements.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-globe icon"></i>
+            <h3>Web Development</h3>
+            <p>Modern, responsive, and high-performing websites designed for engagement.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-cloud icon"></i>
+            <h3>Cloud Solutions</h3>
+            <p>Scalable cloud infrastructure ensuring security and efficiency.</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-lightbulb icon"></i>
+            <h3>IT Consulting</h3>
+            <p>Expert insights to guide your business in the right technological direction.</p>
+        </div>
+    </div>
+</section>
+
+<section id="why-choose-us" class="why-choose-us">
+    <h2>Why Choose RNG Development?</h2>
+    <p>We are dedicated to delivering high-quality software solutions with a focus on innovation and reliability.</p>
+    <ul class="why-points">
+        <li>
+            <i class="fas fa-cogs"></i>
+            <p><strong>Custom-built solutions:</strong> We design custom-built solutions tailored to your specific needs.</p>
+        </li>
+        <li>
+            <i class="fas fa-chart-line"></i>
+            <p><strong>Scalable technology:</strong> Our solutions are scalable and future-proof to grow with your business.</p>
+        </li>
+        <li>
+            <i class="fas fa-headset"></i>
+            <p><strong>Customer support:</strong> We offer dedicated customer support and guidance every step of the way.</p>
+        </li>
+    </ul>
+</section>
+
+
+<section id="contact-cta" class="contact-cta">
+    <h2>Start Your Digital Transformation Today</h2>
+    <p>Contact us and discover how we can revolutionize your business with our innovative solutions.</p>
+    <a href="/Home/Contact" class="btn">Get in Touch</a>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => {
+                slide.style.display = "none";
+                slide.style.opacity = 0;
+            });
+
+            slides[index].style.display = "block";
+            setTimeout(() => {
+                slides[index].style.opacity = 1;
+            }, 100); // Delay for smooth transition
+        }
+
+        function nextSlide() {
+            slides[currentSlide].style.opacity = 0;
+            setTimeout(() => {
+                slides[currentSlide].style.display = "none";
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, 500);
+        }
+
+        showSlide(currentSlide);
+        setInterval(nextSlide, 4000); // Change slide every 4 seconds
+    });
+</script>
+
 
