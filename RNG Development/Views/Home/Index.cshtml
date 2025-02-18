@@ -6,11 +6,7 @@
 <section id="intro" class="intro-section" style="margin-top: 10px;">
     <div class="container">
         <h1>Welcome to RNG Development</h1>
-        <div class="slideshow">
-            <p class="slide">We provide <span class="highlight">cutting-edge</span> software solutions.</p>
-            <p class="slide">Our expertise spans <span class="highlight">custom software</span> and cloud solutions.</p>
-            <p class="slide">We focus on <span class="highlight">IT consulting</span> and digital transformation.</p>
-        </div>
+        <p>We provide <span id="typed-text" class="highlight"></span></p>
     </div>
 </section>
 
@@ -18,27 +14,50 @@
     <h2>Our Services</h2>
     <div class="service-cards">
         <div class="card">
-            <i class="fas fa-code icon"></i>
+            <div class="icon-container">
+                <i class="fas fa-code icon"></i>
+            </div>
             <h3>Custom Software</h3>
             <p>We build tailored applications to meet your unique business requirements.</p>
         </div>
         <div class="card">
-            <i class="fas fa-globe icon"></i>
+            <div class="icon-container">
+                <i class="fas fa-globe icon"></i>
+            </div>
             <h3>Web Development</h3>
             <p>Modern, responsive, and high-performing websites designed for engagement.</p>
         </div>
         <div class="card">
-            <i class="fas fa-cloud icon"></i>
+            <div class="icon-container">
+                <i class="fas fa-mobile-alt icon"></i>
+            </div>
+            <h3>Mobile Development</h3>
+            <p>Creating innovative Android apps for seamless user experiences.</p>
+        </div>
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-database icon"></i>
+            </div>
+            <h3>Database Management</h3>
+            <p>Optimized database solutions for efficiency, security, and scalability.</p>
+        </div>
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-cloud icon"></i>
+            </div>
             <h3>Cloud Solutions</h3>
             <p>Scalable cloud infrastructure ensuring security and efficiency.</p>
         </div>
         <div class="card">
-            <i class="fas fa-lightbulb icon"></i>
+            <div class="icon-container">
+                <i class="fas fa-lightbulb icon"></i>
+            </div>
             <h3>IT Consulting</h3>
             <p>Expert insights to guide your business in the right technological direction.</p>
         </div>
     </div>
 </section>
+
 
 <section id="why-choose-us" class="why-choose-us">
     <h2>Why Choose RNG Development?</h2>
@@ -66,35 +85,16 @@
     <a href="/Home/Contact" class="btn">Get in Touch</a>
 </section>
 
+<!-- Include Typed.js -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let slides = document.querySelectorAll(".slide");
-        let currentSlide = 0;
+    var options = {
+        strings: ["cutting-edge software solutions.", "custom software and cloud solutions.", "IT consulting and digital transformation."],
+        typeSpeed: 50, // Speed of typing
+        backSpeed: 30, // Speed of deleting
+        backDelay: 2000, // Delay before deleting
+        loop: true // Repeat indefinitely
+    };
 
-        function showSlide(index) {
-            slides.forEach(slide => {
-                slide.style.display = "none";
-                slide.style.opacity = 0;
-            });
-
-            slides[index].style.display = "block";
-            setTimeout(() => {
-                slides[index].style.opacity = 1;
-            }, 100); // Delay for smooth transition
-        }
-
-        function nextSlide() {
-            slides[currentSlide].style.opacity = 0;
-            setTimeout(() => {
-                slides[currentSlide].style.display = "none";
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }, 500);
-        }
-
-        showSlide(currentSlide);
-        setInterval(nextSlide, 4000); // Change slide every 4 seconds
-    });
+    var typed = new Typed("#typed-text", options);
 </script>
-
-

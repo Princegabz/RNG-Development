@@ -130,27 +130,26 @@
             padding: 50px 20px;
             background: white;
             margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Service cards styles */
         .service-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
+            display: flex;
             justify-content: center;
-            margin: 0 auto;
+            gap: 30px;
+            flex-wrap: wrap;
             max-width: 1200px;
+            margin: 0 auto;
         }
 
         .card {
             background: #fff;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 300px;
         }
 
             .card:hover {
@@ -158,26 +157,34 @@
                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
             }
 
-        .icon {
-            font-size: 50px;
-            color: #007BFF;
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
+        /* Icon styling */
+        .icon-container {
+            background: rgba(0, 0, 0, 0.05);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 15px;
         }
 
-            .icon:hover {
-                color: #0056b3;
-            }
+        .icon {
+            font-size: 40px;
+            color: black;
+        }
 
+        /* Text Styling */
         h3 {
             font-size: 1.5em;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         p {
             font-size: 1em;
             color: #555;
         }
+
 
         /* Highlight text style */
         .highlight {
@@ -207,24 +214,6 @@
                 .contact-cta .btn:hover {
                     background: #ddd;
                 }
-
-        /* Slideshow styles */
-        .slideshow {
-            position: relative;
-            height: 50px;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            width: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
-            .slide:first-child {
-                opacity: 1;
-            }
 
         /* Why Choose Us section */
         .why-choose-us {
@@ -276,37 +265,6 @@
                 .why-points li strong {
                     font-weight: bold;
                 }
-
-        /* Slideshow animation */
-        @@keyframes slideShow {
-            0% {
-                opacity: 1;
-            }
-
-            40% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 0;
-            }
-        }
-
-        .slide:nth-child(1) {
-            animation: slideShow 12s infinite 0s;
-        }
-
-        .slide:nth-child(2) {
-            animation: slideShow 12s infinite 4s;
-        }
-
-        .slide:nth-child(3) {
-            animation: slideShow 12s infinite 8s;
-        }
 
         @@media (max-width: 768px) {
             .nav-links {
