@@ -1,17 +1,214 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Welcome to RNG Development";
 }
 
-<section id="intro" class="intro-section" style="margin-top: 10px;">
-    <div class="container">
-        <h1>Welcome to RNG Development</h1>
-        <p>We provide <span id="typed-text" class="highlight"></span></p>
+<style>
+    /* ==== INTRO SECTION ==== */
+    .intro-section-fullscreen {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        text-align: left;
+        padding: 0 5%;
+    }
+
+    .intro-container-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1200px;
+        z-index: 2;
+    }
+
+    /* Left Background (Hidden on Small Screens) */
+    .intro-section-fullscreen {
+        background: linear-gradient(to right, #000 0%, #fff 100%);
+    }
+
+
+    @@keyframes intro-fade-in-left {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* ==== TEXT SECTION ==== */
+    .intro-text-section h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: white;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .intro-text-section p {
+        font-size: 1.4rem;
+        margin-top: 10px;
+        color: white;
+    }
+
+    .intro-highlight {
+        font-weight: bold;
+    }
+
+    /* Image Section */
+    .intro-image-section {
+        width: 50%;
+        text-align: center;
+        opacity: 0;
+        transform: scale(0.8);
+        animation: intro-zoom-in 1.2s ease-out 1s forwards;
+    }
+
+        .intro-image-section img {
+            width: 400px;
+            max-width: 100%;
+        }
+
+    @@keyframes intro-zoom-in {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* ==== BUTTON STYLING ==== */
+    .intro-explore-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid white;
+        border-radius: 9999px;
+        background-color: rgba(0, 0, 0, 1);
+        padding: 0.625rem 1.5rem;
+        text-align: center;
+        color: rgba(255, 255, 255, 1);
+        outline: 0;
+        transition: all .2s ease;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+
+        .intro-explore-button:hover {
+            background-color: transparent;
+            color: rgba(255, 255, 255, 1);
+        }
+
+    .intro-icon {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    .intro-texts {
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1;
+    }
+
+    .intro-text-1 {
+        margin-bottom: 0.25rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        text-transform: uppercase;
+    }
+
+    .intro-text-2 {
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    /* ==== MOBILE STYLES ==== */
+    @@media (max-width: 768px) {
+        .intro-section-fullscreen {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .intro-container-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .intro-text-section {
+            width: 100%;
+            color: black;
+            order: 1; /* Ensures text remains at the top */
+        }
+
+            .intro-text-section h1 {
+                color: white;
+            }
+
+            .intro-text-section p {
+                font-size: 1.4rem;
+                margin-top: 10px;
+                color: white;
+            }
+
+        .intro-image-section {
+            width: 100%;
+            margin-top: 20px;
+            order: 2; /* Moves image below the text and button */
+        }
+
+        .intro-section-fullscreen .intro-left-bg {
+            display: none;
+        }
+
+        .intro-explore-button:hover {
+            background-color: black;
+            color: white;
+        }
+    }
+</style>
+
+<!-- INTRO SECTION -->
+<section class="intro-section-fullscreen">
+    <div class="intro-container-layout">
+        <div class="intro-text-section">
+            <h1>Welcome to <br> <span>RNG Development</span></h1>
+
+            <p>We provide <span id="typed-text" class="intro-highlight"></span></p>
+            <a class="intro-explore-button" href="#services">
+                <!-- New Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="intro-icon" viewBox="0 0 512 512">
+                    <path d="M409.6 104.1L406.5 102c-2.4-2.4-5.8-2.4-8.2 0l-82.2 82.3c-3.1 3.1-8.2 3.1-11.3 0-3.1-3.1-3.1-8.2 0-11.3l82.3-82.3c2.4-2.4 2.4-5.8 0-8.2l-2.1-2.1c-2.4-2.4-5.8-2.4-8.2 0l-72.1 72.1c-4.7-1.4-9.9-2.1-15.2-2.1-8.7 0-17.3 2.4-24.8 6.7L315.5 75.7c-8.2-2.5-16.5-3.8-25.1-3.8-29.4 0-56.9 11.6-77.7 32.4l-67.4 67.4c-3.1 3.1-8.2 3.1-11.3 0l-8.6-8.6c-3.1-3.1-3.1-8.2 0-11.3l67.4-67.4c20.9-20.9 48.2-32.5 77.6-32.5 19.7 0 39.5 5.4 56.5 15.6L404.4 91c16.5 9.1 32.4 21.8 46.6 36 17.4 17.4 31.1 37.3 41.1 58.8l-81.4 81.4c-5.2-6.5-12.6-11.9-20.6-15.3-18.7-7.8-40.7-4.1-58.6 11.3-27.2 22.4-38.3 60.2-31.5 94.4l4.7 24.3c2.5 8.2-6.7 14.9-14.9 12.4-1.7-.6-3.4-1.1-5.2-1.6l-25.1-12.7c-9.2-4.6-19.5-7.2-29.7-7.2-7.4 0-14.7 1.6-21.7 4.5-13.4 4.9-24.9 12.6-35.5 23.2l-19.1 19.1c-9.7 9.7-21.7 16.7-34.1 20.4L162.5 431c-3.1 3.1-8.2 3.1-11.3 0l-17.8-17.8c-3.1-3.1-3.1-8.2 0-11.3l99.7-99.7c2.9-2.9 7.6-2.9 10.5 0l56.1 56.1c6.8 6.8 6.8 17.8 0 24.7l-8.6 8.6c-6.8 6.8-17.8 6.8-24.7 0l-24.1-24.1c-8.1-8.1-8.1-21.2 0-29.2L389 274c10.9-10.9 25.9-13.8 40.1-7.7 21.3 9.6 38.2 25.5 54.5 42.7 16.3 17.2 29.8 36.1 41.4 57.6 17.3 30.5 21.4 66.5 9.4 100.6z"></path>
+                </svg>
+                <span class="intro-texts">
+                    <span class="intro-text-1">EXPLORE</span>
+                    <span class="intro-text-2">Our Services</span>
+                </span>
+            </a>
+        </div>
+        <div class="intro-image-section">
+            <img src="~/image/phone_illustration.jpg" alt="Hand Holding Mobile">
+        </div>
     </div>
+    <div class="intro-left-bg"></div>
 </section>
 
+<!-- SERVICES SECTION -->
 <section id="services" class="services">
     <h2>Our Services</h2>
+    <br />
     <div class="service-cards">
         <div class="card">
             <div class="icon-container">
@@ -59,31 +256,43 @@
 </section>
 
 
+<!-- WHY CHOOSE US SECTION -->
 <section id="why-choose-us" class="why-choose-us">
     <h2>Why Choose RNG Development?</h2>
     <p>We are dedicated to delivering high-quality software solutions with a focus on innovation and reliability.</p>
     <ul class="why-points">
         <li>
             <i class="fas fa-cogs"></i>
-            <p><strong>Custom-built solutions:</strong> We design custom-built solutions tailored to your specific needs.</p>
+            <p><strong style="color:black;">Custom-built solutions:</strong> We design custom-built solutions tailored to your specific needs.</p>
         </li>
         <li>
             <i class="fas fa-chart-line"></i>
-            <p><strong>Scalable technology:</strong> Our solutions are scalable and future-proof to grow with your business.</p>
+            <p><strong style="color:black;">Scalable technology:</strong> Our solutions are scalable and future-proof to grow with your business.</p>
         </li>
         <li>
             <i class="fas fa-headset"></i>
-            <p><strong>Customer support:</strong> We offer dedicated customer support and guidance every step of the way.</p>
+            <p><strong style="color:black;">Customer support:</strong> We offer dedicated customer support and guidance every step of the way.</p>
         </li>
     </ul>
 </section>
 
 
-<section id="contact-cta" class="contact-cta">
-    <h2>Start Your Digital Transformation Today</h2>
-    <p>Contact us and discover how we can revolutionize your business with our innovative solutions.</p>
-    <a href="/Home/Contact" class="btn">Get in Touch</a>
+<!-- CONTACT SECTION -->
+<section class="contact-cta">
+    <h2>Get in Touch with Us</h2>
+    <p>If you have any questions or want to work with us, reach out today!</p>
+    <a class="intro-explore-button" href="contact-us-page">
+        <!-- Phone Icon SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="intro-icon" viewBox="0 0 512 512">
+            <path d="M411.1 400.1l-92.7-92.7c-13.2-13.2-33.4-13.2-46.6 0l-32.3 32.3c-13.2 13.2-13.2 33.4 0 46.6l27.5 27.5c-45.2 26.6-104.1 34.5-156.6 26.9-12.2-1.7-23.1-9.3-30.5-17.6-31.6-35.4-50.2-81.4-53.6-130.1-3.4-45.7 11.5-92.6 42.6-133.7l70.7-70.7c25.5-25.5 60.7-31.2 90.8-18.6 40.2 16.3 69.2 46.5 80.2 84.7 14.5 41.2 13.7 86.8-2.9 126.3z"></path>
+        </svg>
+        <span class="intro-texts">
+            <span class="intro-text-1">CONTACT</span>
+            <span class="intro-text-2"> Contact Us</span>
+        </span>
+    </a>
 </section>
+
 
 <!-- Include Typed.js -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
