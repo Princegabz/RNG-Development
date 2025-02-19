@@ -300,6 +300,27 @@
 <!-- Include Typed.js -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.card');
+
+        // Create an Intersection Observer
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // If the card is in the viewport
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view'); // Add the 'in-view' class
+                    observer.unobserve(entry.target); // Stop observing the card after it has entered the viewport
+                }
+            });
+        }, { threshold: 0.3 }); // 30% of the card should be visible to trigger the effect
+
+        // Observe each card
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    });
+
+
     var options = {
         strings: ["cutting-edge software solutions.", "custom software and cloud solutions.", "IT consulting and digital transformation."],
         typeSpeed: 50, // Speed of typing
