@@ -2,97 +2,229 @@
     ViewData["Title"] = "About Us - RNG Development";
 }
 <style>
-
-    .about-hero {
-        text-align: center;
-        padding: 100px 20px;
-        background: linear-gradient(to right, #000, #444);
-        color: white;
+    /* General Section Styling */
+    section {
+        padding: 20px 10%;
     }
 
-    .about-section, .values-section, .cta-section {
-        text-align: center;
-        padding: 50px;
-        background: white;
-    }
-
-    .values-grid {
+    /* Section Layout */
+    .section-container {
         display: flex;
-        justify-content: center;
-        gap: 20px;
+        align-items: center;
+        justify-content: space-between;
     }
 
-    .value-card {
-        background: #f5f5f5;
-        padding: 20px;
+    .text-content {
+        max-width: 600px;
+        text-align: justify;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .image-content {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    /* Heading and Paragraph Styling */
+    .text-content h1, .text-content h2, .core-values h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .text-content p {
+        font-size: 1.2rem;
+    }
+
+    /* Image Styling */
+    .image-content img {
+        width: 100%;
+        max-width: 300px;
         border-radius: 8px;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        width: 250px;
     }
 
-    .cta-section {
-        background: black;
-        color: white;
+    /* Core Values Section */
+    .core-values-grid {
+        display: flex;
+        justify-content: center;
+        gap: 120px;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-        .cta-section .btn {
-            background: white;
-            color: black;
-            padding: 10px 20px;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
+    .core-value-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 12px black;
+        text-align: center;
+        width: 300px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: transform 0.6s ease, box-shadow 0.3s ease, opacity 0.6s ease;
+    }
+
+        .core-value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px black;
         }
 
-    footer {
-        text-align: center;
-        padding: 20px;
-        background: black;
-        color: white;
+        .core-value-card.in-view, .text-content.in-view, .image-content.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+    /* Icon Styling */
+    .icon-container {
+        background: rgba(0, 0, 0, 0.05);
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin: 0 auto 15px;
     }
 
+    .icon {
+        font-size: 40px;
+        color: black;
+    }
+
+    /* Text Styling */
+    h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 1em;
+        color: #555;
+    }
+
+    /* Responsive Adjustments */
+    @@media (max-width: 768px) {
+        .core-values-grid {
+            gap: 30px;
+        }
+
+        .section-container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .text-content, .image-content {
+            max-width: 100%;
+        }
+
+            .image-content img {
+                max-width: 80%;
+                margin-top: 20px;
+            }
+        /* Ensure "Our Vision" section displays text before image */
+        .vision .section-container {
+            display: flex;
+            flex-direction: column !important;
+            align-items: center;
+        }
+
+        .vision .text-content {
+            order: 1;
+        }
+
+        .vision .image-content {
+            order: 2;
+        }
+    }
 </style>
-<header class="about-hero">
-    <div class="about-content">
-        <h1>About RNG Development</h1>
-        <p>Empowering businesses with cutting-edge software solutions.</p>
-    </div>
-</header>
 
-<section class="about-section">
-    <div class="container">
-        <h2>Who We Are</h2>
-        <p>
-            At RNG Development, we are passionate about crafting innovative software solutions tailored to your business needs.
-            Our expert team specializes in web development, custom software, and cloud solutions that drive success.
-        </p>
-    </div>
-</section>
-
-<section class="values-section">
-    <div class="container">
-        <h2>Our Core Values</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <h3>Innovation</h3>
-                <p>We stay ahead with the latest technology to deliver modern solutions.</p>
-            </div>
-            <div class="value-card">
-                <h3>Quality</h3>
-                <p>We maintain high standards to ensure reliable and efficient software.</p>
-            </div>
-            <div class="value-card">
-                <h3>Customer Focus</h3>
-                <p>Your business goals drive our solutions. We prioritize user satisfaction.</p>
-            </div>
+<section class="about">
+    <div class="section-container">
+        <div class="text-content">
+            <h1>About <span class="highlight">RNG Development</span>,</h1>
+            <p>At RNG Development, we are committed to delivering cutting-edge software solutions tailored to modern business needs. Our expertise spans across software engineering, cloud solutions, and IT consulting, ensuring that our clients receive the most efficient, scalable, and high-quality digital products.</p>
+        </div>
+        <div class="image-content">
+            <img src="~/image/about_intro_image.png" alt="About Us">
         </div>
     </div>
 </section>
 
-<section class="cta-section">
-    <div class="container">
-        <h2>Ready to Transform Your Business?</h2>
-        <p>Let’s build something great together.</p>
-        <a href="/Home/Contact" class="btn">Get in Touch</a>
+<section class="vision">
+    <div class="section-container" style="flex-direction: row-reverse;">
+        <div class="text-content">
+            <h2>Our Vision</h2>
+            <p>We envision a world where businesses leverage technology seamlessly to achieve their full potential. RNG Development is committed to leading this digital revolution by providing innovative, sustainable, and user-centric solutions that redefine industries and enhance efficiency.</p>
+        </div>
+        <div class="image-content">
+            <img src="~/image/about_vision.png" alt="Our Vision">
+        </div>
     </div>
 </section>
+
+<section class="mission">
+    <div class="section-container">
+        <div class="text-content">
+            <h2>Our Mission</h2>
+            <p>Our mission is to empower businesses with robust, scalable, and high-performance digital solutions. We aim to bridge the gap between technology and business operations, ensuring organizations remain agile, secure, and future-proof in an ever-evolving digital landscape.</p>
+        </div>
+        <div class="image-content">
+            <img src="~/image/about_mission.png" alt="Our Mission">
+        </div>
+    </div>
+</section>
+
+<section class="core-values">
+    <h2>Our Core Values</h2>
+    <div class="core-values-grid">
+        <div class="core-value-card">
+            <div class="icon-container">
+                <i class="fas fa-lightbulb icon"></i>
+            </div>
+            <h3>Innovation</h3>
+            <p>We leverage the latest technologies to develop groundbreaking digital solutions that set new industry standards.</p>
+        </div>
+        <div class="core-value-card">
+            <div class="icon-container">
+                <i class="fas fa-cogs icon"></i>
+            </div>
+            <h3>Quality</h3>
+            <p>Every product we deliver is tested rigorously to ensure the highest level of security, performance, and efficiency.</p>
+        </div>
+        <div class="core-value-card">
+            <div class="icon-container">
+                <i class="fas fa-users icon"></i>
+            </div>
+            <h3>Customer Focus</h3>
+            <p>Understanding our clients' unique needs and challenges allows us to provide customized, user-centric solutions that drive success.</p>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Function to handle the scroll effect
+    document.addEventListener('DOMContentLoaded', function () {
+        const textElements = document.querySelectorAll('.text-content');
+        const imageElements = document.querySelectorAll('.image-content');
+        const coreValueCards = document.querySelectorAll('.core-value-card');
+
+        // Intersection Observer to trigger the animation when elements come into view
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe the text, image, and core value elements
+        textElements.forEach(element => observer.observe(element));
+        imageElements.forEach(element => observer.observe(element));
+        coreValueCards.forEach(element => observer.observe(element));
+    });
+</script>
