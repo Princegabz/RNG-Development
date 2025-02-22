@@ -102,8 +102,11 @@
     }
 
         .intro-explore-button:hover {
-            background-color: transparent;
-            color: rgba(255, 255, 255, 1);
+            color: black;
+            background-color: white;
+            border-color: black;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
         }
 
     .intro-icon {
@@ -347,53 +350,24 @@
 <!-- SERVICES SECTION -->
 <section id="services" class="services">
     <h2>Our Services</h2>
-    <br />
+    <p>We provide top-notch software solutions tailored to your needs.</p><br />
     <div class="service-cards">
         <div class="card">
-            <div class="icon-container">
-                <i class="fas fa-code icon"></i>
-            </div>
+            <i class="fas fa-code icon"></i>
             <h3>Custom Software</h3>
-            <p>We build tailored applications to meet your unique business requirements.</p>
         </div>
         <div class="card">
-            <div class="icon-container">
-                <i class="fas fa-globe icon"></i>
-            </div>
+            <i class="fas fa-globe icon"></i>
             <h3>Web Development</h3>
-            <p>Modern, responsive, and high-performing websites designed for engagement.</p>
         </div>
         <div class="card">
-            <div class="icon-container">
-                <i class="fas fa-mobile-alt icon"></i>
-            </div>
+            <i class="fas fa-mobile-alt icon"></i>
             <h3>Mobile Development</h3>
-            <p>Creating innovative Android apps for seamless user experiences.</p>
-        </div>
-        <div class="card">
-            <div class="icon-container">
-                <i class="fas fa-database icon"></i>
-            </div>
-            <h3>Database Management</h3>
-            <p>Optimized database solutions for efficiency, security, and scalability.</p>
-        </div>
-        <div class="card">
-            <div class="icon-container">
-                <i class="fas fa-cloud icon"></i>
-            </div>
-            <h3>Cloud Solutions</h3>
-            <p>Scalable cloud infrastructure ensuring security and efficiency.</p>
-        </div>
-        <div class="card">
-            <div class="icon-container">
-                <i class="fas fa-lightbulb icon"></i>
-            </div>
-            <h3>IT Consulting</h3>
-            <p>Expert insights to guide your business in the right technological direction.</p>
         </div>
     </div>
+    <br />
+    <a href="@Url.Action("Services", "Home")" class="intro-explore-button">View All Services</a>
 </section>
-
 
 <!-- WHY CHOOSE US SECTION -->
 <section id="why-choose-us" class="why-choose-us">
@@ -415,12 +389,11 @@
     </ul>
 </section>
 
-
 <!-- CONTACT SECTION -->
 <section class="contact-cta">
     <h2>Get in Touch with Us</h2>
     <p>If you have any questions or want to work with us, reach out today!</p>
-    <a class="intro-explore-button" href="contact-us-page">
+    <a class="intro-explore-button" href="@Url.Action("Contact", "Home")">
         <!-- Phone Icon SVG -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="intro-icon" viewBox="0 0 512 512">
             <path d="M411.1 400.1l-92.7-92.7c-13.2-13.2-33.4-13.2-46.6 0l-32.3 32.3c-13.2 13.2-13.2 33.4 0 46.6l27.5 27.5c-45.2 26.6-104.1 34.5-156.6 26.9-12.2-1.7-23.1-9.3-30.5-17.6-31.6-35.4-50.2-81.4-53.6-130.1-3.4-45.7 11.5-92.6 42.6-133.7l70.7-70.7c25.5-25.5 60.7-31.2 90.8-18.6 40.2 16.3 69.2 46.5 80.2 84.7 14.5 41.2 13.7 86.8-2.9 126.3z"></path>
@@ -431,7 +404,6 @@
         </span>
     </a>
 </section>
-
 
 <!-- Include Typed.js -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>

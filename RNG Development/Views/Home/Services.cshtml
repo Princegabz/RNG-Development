@@ -1,103 +1,359 @@
 ﻿@{
     ViewData["Title"] = "Our Services - RNG Development";
 }
+
 <style>
-    .services-hero {
-        text-align: center;
-        padding: 100px 20px;
-        background: linear-gradient(to right, #000, #444);
-        color: white;
-    }
-
-    .services-section {
-        text-align: center;
-        padding: 50px;
-        background: white;
-    }
-
-    .services-grid {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .service-card {
-        background: #f5f5f5;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        width: 250px;
+    /* General styling for the services section */
+    #services {
+        background-color: white;
+        color: black;
+        padding: 50px 20px;
         text-align: center;
     }
 
-        .service-card img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
+        #services h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: black;
         }
 
-    .cta-section {
-        background: black;
-        color: white;
-        text-align: center;
-        padding: 50px;
+        /* Added animation effect for the paragraph */
+        #services p.description {
+            font-size: 1.2em;
+            margin-top: 15px;
+            color: #666;
+            opacity: 0; /* Initially hidden */
+            transform: translateY(20px); /* Start slightly lower */
+            animation: fadeInUp 1s forwards 0.5s; /* Animation delay */
+        }
+
+    /* Service cards container */
+    .service-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        justify-items: center;
     }
 
-        .cta-section .btn {
-            background: white;
+    @@media (max-width: 992px) {
+        .service-cards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .service-cards {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Keyframes for fade-in-up animation */
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Individual card styling */
+    .card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 10px black;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        max-width: 300px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        opacity: 0; /* Initially hidden */
+        transform: translateY(50px); /* Start below */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth transition */
+    }
+
+        .card.in-view {
+            opacity: 1;
+            transform: translateY(0); /* Fade-in and slide-up effect */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+    /* Icon container */
+    .icon-container {
+        background-color: black;
+        padding: 15px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-bottom: 20px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon {
+        font-size: 1.5rem;
+        color: #fff;
+    }
+
+    .card h3 {
+        font-size: 1.30rem;
+        margin-bottom: 15px;
+        color: black;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        color: #555;
+        text-align: center;
+        flex-grow: 1;
+    }
+
+    /* "More" link styling */
+    .card a {
+        font-size: 1rem;
+        background-color: black;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        text-align: center;
+        border: 1px solid black;
+        font-weight: bold;
+    }
+
+        .card a:hover {
             color: black;
-            padding: 10px 20px;
+            background-color: white;
+            border-color: black;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+    /* Modal styles */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Fixed in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+        padding-top: 60px;
+    }
+
+    .modal-content {
+        background-color: white;
+        margin: 5% auto;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 500px; /* Ensure all modals are the same width */
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: black;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
+            cursor: pointer;
         }
 </style>
-<header class="services-hero">
-    <div class="services-content">
-        <h1>Our Services</h1>
-        <p>Innovative software solutions tailored to your business needs.</p>
-    </div>
-</header>
 
-<section class="services-section">
-    <div class="container">
-        <h2>What We Offer</h2>
-        <div class="services-grid">
 
-            <div class="service-card">
-                <img src="~/image/web-development.png" alt="Web Development">
-                <h3>Web Development</h3>
-                <p>We build fast, scalable, and responsive websites using the latest technologies.</p>
+<section id="services" class="services">
+    <h2 style="font-size: 32px;">Our Services</h2>
+    <p class="description">We offer a wide range of services to help your business grow, including software development, web design, mobile apps, and more.</p>
+    <br />
+    <div class="service-cards">
+        <!-- Service Card 1 -->
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-code icon"></i>
             </div>
+            <h3>Custom Software</h3>
+            <p>We build tailored applications to meet your unique business requirements.</p>
+            <a href="javascript:void(0);" onclick="openModal('customSoftwareModal')">More</a>
+        </div>
 
-            <div class="service-card">
-                <img src="~/image/software-development.png" alt="Software Development">
-                <h3>Custom Software</h3>
-                <p>Tailored software solutions that fit your business requirements perfectly.</p>
+        <!-- Modal for Custom Software -->
+        <div id="customSoftwareModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('customSoftwareModal')">&times;</span>
+                <h2>Custom Software Development</h2>
+                <p>We specialize in developing custom software solutions designed to meet the unique needs of your business. From desktop applications to cloud-based systems, our team ensures the solution is scalable, secure, and tailored to your operations.</p>
+                <p>Collaborating closely with your team, we create applications that optimize your business workflows, improve productivity, and enhance your bottom line.</p>
             </div>
+        </div>
 
-            <div class="service-card">
-                <img src="~/image/cloud-solutions.png" alt="Cloud Solutions">
-                <h3>Cloud Solutions</h3>
-                <p>Secure and scalable cloud services to help you grow and innovate faster.</p>
+        <!-- Service Card 2 -->
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-globe icon"></i>
             </div>
+            <h3>Web Development</h3>
+            <p>Modern, responsive, and high-performing websites designed for engagement.</p>
+            <a href="javascript:void(0);" onclick="openModal('webDevModal')">More</a>
+        </div>
 
-            <div class="service-card">
-                <img src="~/image/it-consulting.png" alt="IT Consulting">
-                <h3>IT Consulting</h3>
-                <p>Expert advice and guidance to optimize your IT infrastructure and strategies.</p>
+        <!-- Modal for Web Development -->
+        <div id="webDevModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('webDevModal')">&times;</span>
+                <h2>Web Development</h2>
+                <p>Our web development services focus on building mobile-friendly, high-performing websites tailored to your brand. Whether it's an e-commerce platform or a company website, we use the latest technologies to ensure your site is both functional and scalable.</p>
+                <p>We aim to create a seamless online experience that drives user engagement and business growth, ensuring a robust and secure web presence.</p>
             </div>
+        </div>
 
+        <!-- Service Card 3 -->
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-mobile-alt icon"></i>
+            </div>
+            <h3>Mobile Development</h3>
+            <p>Creating innovative Android apps for seamless user experiences.</p>
+            <a href="javascript:void(0);" onclick="openModal('mobileDevModal')">More</a>
+        </div>
+
+        <!-- Modal for Mobile Development -->
+        <div id="mobileDevModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('mobileDevModal')">&times;</span>
+                <h2>Mobile Development</h2>
+                <p>Our mobile app development services deliver robust, user-centric Android apps. We focus on creating apps that provide seamless performance, rich features, and intuitive design, ensuring your users have the best possible experience.</p>
+                <p>We work with you to understand your goals, ensuring the app we develop aligns with your business objectives and provides value to your users.</p>
+            </div>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-database icon"></i>
+            </div>
+            <h3>Database Management</h3>
+            <p>Optimized database solutions for efficiency, security, and scalability.</p>
+            <a href="javascript:void(0);" onclick="openModal('databaseModal')">More</a>
+        </div>
+
+        <!-- Modal for Database Management -->
+        <div id="databaseModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('databaseModal')">&times;</span>
+                <h2>Database Management</h2>
+                <p>Our database management services focus on ensuring the security, efficiency, and scalability of your data systems. We design custom databases that grow with your business while optimizing performance and accessibility.</p>
+                <p>We also ensure that your databases are secure, reducing the risk of data breaches and optimizing your operations with reliable data solutions.</p>
+            </div>
+        </div>
+        <!-- Service Card 5 -->
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-cloud icon"></i>
+            </div>
+            <h3>Cloud Solutions</h3>
+            <p>Scalable cloud infrastructure ensuring security and efficiency.</p>
+            <a href="javascript:void(0);" onclick="openModal('cloudSolutionsModal')">More</a>
+        </div>
+
+        <!-- Modal for Cloud Solutions -->
+        <div id="cloudSolutionsModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('cloudSolutionsModal')">&times;</span>
+                <h2>Cloud Solutions</h2>
+                <p>We offer secure and scalable cloud solutions that enhance your business agility. With our services, you can access cloud storage, computing, and data analytics to improve business performance and reduce costs.</p>
+                <p>Our cloud services are designed to help you stay ahead in a competitive market by providing flexible, on-demand resources and improving operational efficiency.</p>
+            </div>
+        </div>
+
+        <!-- Service Card 6 -->
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-lightbulb icon"></i>
+            </div>
+            <h3>IT Consulting</h3>
+            <p>Expert insights to guide your business in the right technological direction.</p>
+            <a href="javascript:void(0);" onclick="openModal('itConsultingModal')">More</a>
+        </div>
+
+        <!-- Modal for IT Consulting -->
+        <div id="itConsultingModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('itConsultingModal')">&times;</span>
+                <h2>IT Consulting</h2>
+                <p>Our IT consulting services help your business implement effective, innovative technologies. We provide expert guidance on system integration, data management, and digital transformation to ensure your technology infrastructure supports your business goals.</p>
+                <p>Our team works closely with you to identify opportunities for growth and optimize your IT operations for improved efficiency and scalability.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="cta-section">
-    <div class="container">
-        <h2>Let's Build Something Amazing!</h2>
-        <p>Get in touch to discuss how we can help your business grow.</p>
-        <a href="/Home/Contact" class="btn">Contact Us</a>
-    </div>
-</section>
+<!-- JavaScript to control modal open/close functionality -->
+<script>
+            document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.card');
 
+        // Create an Intersection Observer
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // If the card is in the viewport
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view'); // Add the 'in-view' class
+                    observer.unobserve(entry.target); // Stop observing the card after it has entered the viewport
+                }
+            });
+        }, { threshold: 0.3 }); // 30% of the card should be visible to trigger the effect
+
+        // Observe each card
+        cards.forEach(card => {
+            observer.observe(card);
+        });
+    });
+
+
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
+    // Close the modal if clicked outside the content area
+    window.onclick = function(event) {
+        var modals = document.querySelectorAll('.modal');
+        modals.forEach(function(modal) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
+</script>
