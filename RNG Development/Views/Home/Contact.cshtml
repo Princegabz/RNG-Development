@@ -125,35 +125,47 @@
 </style>
 
 <div style="font-family: Arial, sans-serif; text-align: center; background-color: #f8f9fa; padding: 50px;">
-
     <h1 style="font-size: 32px; font-weight: bold; color: dimgrey;">
         <span style="color: black;">Get in Touch</span> – We're Here to Assist You!
     </h1>
-
     <p style="font-size: 18px; color: #555; margin-top: 10px;">
         Have questions or ideas? Get in touch with our team today and let’s bring your vision to life!
     </p>
 
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div id="successMessage" style="color: green; font-size: 18px;">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div id="errorMessage" style="color: red; font-size: 18px;">
+            @TempData["ErrorMessage"]
+        </div>
+    }
 </div>
+
 
 <div class="contact-box">
     <div class="container-left">
-        <form id="contactForm" onsubmit="return validateForm()">
+        <form id="contactForm" method="post" action="@Url.Action("SendEmail", "Home")">
             <div class="input-group">
                 <label>Name*</label>
-                <input type="text" id="name" placeholder="Enter your Name" required>
+                <input type="text" id="name" name="Name" placeholder="Enter your Name" required>
             </div>
             <div class="input-group">
                 <label>Email*</label>
-                <input type="email" id="email" placeholder="youremail@gmail.com" required>
+                <input type="email" id="email" name="Email" placeholder="youremail@gmail.com" required>
             </div>
             <div class="input-group">
                 <label>Phone</label>
-                <input type="text" id="phone" placeholder="+27 78 938 5751">
+                <input type="text" id="phone" name="Phone" placeholder="+27 78 938 5751">
             </div>
             <div class="input-group">
                 <label>Message*</label>
-                <textarea id="message" rows="5" placeholder="Enter your Message" required></textarea>
+                <textarea id="message" name="Message" rows="5" placeholder="Enter your Message" required></textarea>
             </div>
             <button type="submit">Send Message</button>
         </form>
@@ -167,6 +179,19 @@
 </div>
 
 <script>
+      // Function to hide message after 5 seconds
+    setTimeout(function() {
+        var successMessage = document.getElementById('successMessage');
+        var errorMessage = document.getElementById('errorMessage');
+
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000); // 5000 milliseconds = 5 seconds
+
     function validateForm() {
         var name = document.getElementById('name').value;
         var email = document.getElementById('email').value;
